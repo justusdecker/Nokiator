@@ -13,14 +13,14 @@ The encoder parameters (e.g., for VBR/CBR quality) are controlled via the enviro
 SET ENCODER_FLAGS=-c:a libmp3lame -b:a 128k
 ```
 
-> [NOTE] 
+> [!NOTE] 
 > The script expects this variable to be set. If it is missing, the conversion will fail or use default settings.
 
 ## 🛠️ Usage
 
 The script supports two operating modes: Single File (-s) or Entire Folder (-f).
 
-> [IMPORTANT]
+> [!IMPORTANT]
 > Due to the nature of Batch programming, any path containing spaces must be enclosed in double quotes ("...") when calling the script.
 
 ### Single File Mode (-s)
