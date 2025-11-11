@@ -1,4 +1,5 @@
-# Nokiator
+# 📱 Nokiator
+<img src="./icon.png" width="25%">
 ## AudioFileType-Converter (Nokia RM 1190 Edition)
 This Batch script uses FFmpeg to convert MP3 files, ensuring a Constant Bit Rate (CBR) of 128 kbps. It is optimized for older hardware, especially the Nokia RM 1190.
 
