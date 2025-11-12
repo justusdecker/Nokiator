@@ -1,3 +1,6 @@
 *.exe
 .vscode/*
 convert/*
+*.mp4
+*.avi
+*.mp3
