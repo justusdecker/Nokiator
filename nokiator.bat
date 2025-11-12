@@ -1,25 +1,3 @@
-::AudioFileType-Converter for Nokia RM 1190 (128 kbps CBR) with FFmpeg
-::Copyright 2025 - Justus Decker - GPL V3 License
-::
-::This script converts MP3 files using the parameters defined in %ENCODER_FLAGS%.
-::
-::Call Format:
-::converter.bat [MODE] "PATH"
-::
-::IMPORTANT: Paths containing spaces MUST be enclosed in double quotes ("")!
-::
-::Mode Options:
-::[-h]    Shows this help menu.
-::[-f]    Folder Mode: Converts ALL MP3s in the specified PATH.
-::PATH: The full path to the input folder (without a trailing slash).
-::Example: converter.bat -f "C:\Music"
-::
-::[-s]    Single File Mode: Converts the specified single MP3 file.
-::PATH: The full path to the input file.
-::Example: converter.bat -s "C:\Music\Song A.mp3"
-::
-::Output: All converted files are saved in the './convert' subfolder.
-
 @ECHO OFF
 SETLOCAL ENABLEDELAYEDEXPANSION
 :SHOW_HEADER
