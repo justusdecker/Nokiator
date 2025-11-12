@@ -23,25 +23,34 @@
 @ECHO OFF
 SETLOCAL ENABLEDELAYEDEXPANSION
 :SHOW_HEADER
-    ECHO AudioFileType-Converter for Nokia RM 1190 (128 kbps CBR) with FFmpeg
+    ECHO Nokiator File-Converter for Nokia RM 1190 with FFmpeg
     ECHO Copyright 2025 - Justus Decker - GPL V3 License
 
-SET MODE=%1
-SET PATH=%2
+:TRACE_ARGS
+    SET MODE=%1
+    SET TYPE=%2
+    SET PATH=%3
 
+:VALIDATE_ARGUMENTS
+    SET /a NOT_SET=0
+    IF "%MODE%"=="" SET /a NOT_SET+=1
+    IF "%MODE%"=="-h" GOTO :SHOW_HELP
+    IF "%TYPE%"=="" SET /a NOT_SET+=2
+    IF %PATH%=="" SET /a NOT_SET+=4
 
-IF "%MODE%"=="" (
-    GOTO :SHOW_HELP
-)
+    IF %NOT_SET%==3 echo No File given! && GOTO :EOF
 
-if "%MODE%"=="-h" (
-    GOTO :SHOW_HELP
-) ELSE (
-    IF %PATH%=="" (
-        ECHO No file given!
-        GOTO :EOF
-    )
-)
+:SET_FORMAT
+    IF "%TYPE%"=="mp3" SET "OUT_FORMAT=.mp3" && SET "SEARCH_FORMAT=.mp3" && SET "CALLBACK=./src/ffmpeg_audio.bat"
+    IF "%TYPE%"=="ogg" SET "OUT_FORMAT=.ogg" && SET "SEARCH_FORMAT=.mp3" && SET "CALLBACK=./src/ffmpeg_audio.bat"
+
+    IF "%TYPE%"=="mp4" SET "OUT_FORMAT=.mp4" && SET "SEARCH_FORMAT=.avi" && SET "CALLBACK=./src/ffmpeg_video.bat"
+    IF "%TYPE%"=="mov" SET "OUT_FORMAT=.mov" && SET "SEARCH_FORMAT=.avi" && SET "CALLBACK=./src/ffmpeg_video.bat"
+    IF "%TYPE%"=="avi" SET "OUT_FORMAT=.avi" && SET "SEARCH_FORMAT=.avi" && SET "CALLBACK=./src/ffmpeg_video.bat"
+
+    IF "%TYPE%"=="png" SET "OUT_FORMAT=.png" && SET "SEARCH_FORMAT=.jpg" && SET "CALLBACK=./src/ffmpeg_image.bat"
+    IF "%TYPE%"=="jpg" SET "OUT_FORMAT=.jpg" && SET "SEARCH_FORMAT=.jpg" && SET "CALLBACK=./src/ffmpeg_image.bat"
+    IF "%TYPE%"=="jpeg" SET "OUT_FORMAT=.jpeg" && SET "SEARCH_FORMAT=.jpg" && SET "CALLBACK=./src/ffmpeg_image.bat"
 
 :CREATE_DEST_FOLDER
     if NOT EXIST "./convert" (
@@ -49,13 +58,12 @@ if "%MODE%"=="-h" (
         ECHO [INFO] Destinationfolder: "./convert" created.
     )
 
-IF "%MODE%"=="-s" GOTO FILE
-IF "%MODE%"=="-f" (
-    GOTO :FOLDER
-) ELSE (
+IF "%MODE%"=="-s" GOTO :FILE
+IF "%MODE%"=="-f" GOTO :FOLDER
+
+:MODE_NOT_RECOGNIZED
     ECHO [ERROR] Unrecognized mode: "%MODE%"
     GOTO :EOF
-)
 
 :FOLDER
     ECHO.
@@ -67,12 +75,12 @@ IF "%MODE%"=="-f" (
     ECHO [INFO] Start convert all MP3s in "%PATH%"...
     SET /a COUNT=0
 
-    FOR %%f IN ("%PATH%/*.mp3") do (
+    FOR %%f IN ("%PATH%/*%SEARCH_FORMAT%") do (
         SET /a COUNT+=1
         ECHO.
         ECHO [CONV] Convert File !COUNT!: "%%~nxf"
         
-        call ./src/ffmpeg_audio.bat "%PATH%/%%~nf.mp3" "./convert/%%~nf.mp3"
+        call %CALLBACK% "%PATH%/%%~nf.mp3" "./convert/%%~nf%OUT_FORMAT%"
         
         IF ERRORLEVEL 1 (
             ECHO [ERROR] Error while converting "%%~nxf"!
@@ -96,28 +104,20 @@ IF "%MODE%"=="-f" (
     )
 
     ECHO [INFO] Start converting "%PATH%"...
-    echo %~nf2
     
-    call ./src/ffmpeg_audio.bat %PATH% "./convert/%~n2.mp3"
+    call %CALLBACK% %PATH% "./convert/%~n3%OUT_FORMAT%"
 
     IF ERRORLEVEL 1 (
         ECHO [ERROR] Failed converting: "%PATH%"!
     ) ELSE (
         ECHO [OK] Convert successfull.
         ECHO.
-        ECHO [INFO] Convert file: "./convert/%~n2.mp3"
+        ECHO [INFO] Convert file: "./convert/%~n3.mp3"
     )
 
     PAUSE 2>NUL
     GOTO :EOF
 
 :SHOW_HELP
-    ECHO Modes:
-    ECHO [-h] shows the help menu
-    ECHO [-f] will run in folder mode
-    ECHO [-s] will run in single file mode
-    ECHO FILE/FOLDER "FORMAT":
-    ECHO Folderpaths must be "C:/Users" not "C:/Users/"
-    ECHO Filepaths must be "C:/Users/Music/Bad Girls.mp3"
-    ECHO Must be given in parentheses
+    CALL ./src/show_help.bat
     GOTO :EOF
