@@ -51,4 +51,4 @@ set "FOLDER=%~p2"
 set "FILENAME=%~n2"
 set "NEW_FILEPATH=%DRIVE%%FOLDER%%FILENAME%.avi"
 echo %NEW_FILEPATH%
-call ./src/ffmpeg_call.bat "%1" "%ENCODER_FLAGS%" "%NEW_FILEPATH%"
+ffmpeg -i %1 %ENCODER_FLAGS% -y "%NEW_FILEPATH%"
