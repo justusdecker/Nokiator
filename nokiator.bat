@@ -71,8 +71,8 @@ IF "%MODE%"=="-f" (
         SET /a COUNT+=1
         ECHO.
         ECHO [CONV] Convert File !COUNT!: "%%~nxf"
-
-        ffmpeg -i "%PATH%/%%~nf.mp3" %ENCODER_FLAGS% -y "./convert/%%~nf.mp3"
+        
+        call ./src/ffmpeg_audio.bat "%PATH%/%%~nf.mp3" "./convert/%%~nf.mp3"
         
         IF ERRORLEVEL 1 (
             ECHO [ERROR] Error while converting "%%~nxf"!
@@ -97,7 +97,8 @@ IF "%MODE%"=="-f" (
 
     ECHO [INFO] Start converting "%PATH%"...
     echo %~nf2
-    ffmpeg -i %PATH% %ENCODER_FLAGS% -y "./convert/%~n2.mp3"
+    
+    call ./src/ffmpeg_audio.bat %PATH% "./convert/%~n2.mp3"
 
     IF ERRORLEVEL 1 (
         ECHO [ERROR] Failed converting: "%PATH%"!
