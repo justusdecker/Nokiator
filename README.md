@@ -1,55 +1,32 @@
-# 📱 Nokiator
+# 📱 Nokiator File-Converter
 <img src="./icon.png" width="25%">
 
-## AudioFileType-Converter (Nokia RM 1190 Edition)
-This Batch script uses FFmpeg to convert MP3 files, ensuring a Constant Bit Rate (CBR) of 128 kbps. It is optimized for older hardware, especially the Nokia RM 1190.
+An optimized Batch script wrapper around FFmpeg designed to convert media files into formats strictly compatible with the `Nokia RM 1190` device.
 
-🚀 Prerequisites
+## ✨ Features & Specifications
+This utility ensures maximum compatibility by converting media to the `Nokia RM 1190's` native formats:
+* **Batch & Single File Modes:** Use -f for folder conversion or -s for a single file.
+* **Target Output:** All converted files are saved to the dedicated ./convert output directory.
+* **Audio Optimization:** Converts to Mono audio at a low sampling rate (using libmp3lame) for resource-constrained playback.
+* **Video Optimization:** Converts to `176x144` resolution at `12` FPS (using mpeg4 codec) to match the native video recorder specifications.
+* **Image Optimization:** Handles conversion and scaling (defaulting to `640x144` max) for images.
 
-To run this script, FFmpeg must be available in your %SYSTEM_PATH% or located in the same folder as the Batch script.
+## ⚠️ Prerequisites
+This project is a wrapper and requires the FFmpeg binary to function. Ensure that FFmpeg is accessible by the helper scripts within the ./src directory.
 
-The encoder parameters (e.g., for VBR/CBR quality) are controlled via the environment variable %ENCODER_FLAGS%, which you must set before starting the script.
+The project must maintain the following file structure:
 
-### Recommended Flags for 128 kbps CBR:
-```bash
-SET ENCODER_FLAGS=-c:a libmp3lame -b:a 128k
-```
+    .
+    ├── nokiator.bat
+    └── src
+        ├── ffmpeg_audio.bat    (Audio encoding helper)
+        ├── ffmpeg_video.bat    (Video encoding/scaling helper)
+        ├── ffmpeg_image.bat    (Image conversion helper)
+        └── show_help.bat       (Usage guide)
 
-> [!NOTE] 
-> The script expects this variable to be set. If it is missing, the conversion will fail or use default settings.
-
-## 🛠️ Usage
-
-The script supports two operating modes: Single File (-s) or Entire Folder (-f).
-
-> [!IMPORTANT]
-> Due to the nature of Batch programming, any path containing spaces must be enclosed in double quotes ("...") when calling the script.
-
-### Single File Mode (-s)
-
-Converts a single MP3 file.
-
-Example
-
-```bash
-converter.bat -s "C:\Users\Music\Bad Girls.mp3"
-```
-
-### Folder Mode (-f)
-
-Converts all .mp3 files in the specified folder. The output folder (./convert) is created automatically.
-
-Example
-
-```bash
-converter.bat -f "E:\My Albums"
-```
-
-📂 Output and Structure
+## 📂 Output
 
 All converted files are saved in the subfolder ./convert, which is located in the same directory as the Batch script. The original files remain unchanged.
-
-* Output Structure:
 
 ```
 converter.bat
@@ -58,10 +35,50 @@ converter.bat
     ├─ Song B.mp3
     └─ ...
 ```
-### ❓ Show Help
 
-To display the brief help page directly in the console:
+## 🛠️ Usage
+The script is executed using three required arguments: Mode, Output Type, and the Input Path.
 
+Call Format:
 ```bash
-converter.bat -h
+nokiator.bat [MODE] [TYPE] "PATH"
 ```
+
+> [!IMPORTANT]
+> Paths containing spaces MUST be enclosed in double quotes ("").
+
+### Mode Options
+|Option|Description|
+|---|---|
+|-h|Shows the help menu(`./src/show_help.bat`)
+|-f|Folder Mode: Converts ALL supported input files in the given `PATH`.|
+|-s|Single File Mode: Converts the specific single file `PATH`.|
+
+### Output Formats(WIP)
+
+* `.mp3` 44.1kHz Stereo 96kbit/s 🕐
+* `.mp3` 44.1kHz Stereo 128kbit/s 🕐
+* `.avi` 640x480 24fps 4:3 44.1kHz Stereo 128kbit/s 🕐
+* `.avi` 640x480 24fps 4:3 44.1kHz Mono 128kbit/s 🕐
+* `.avi` 176x144 12fps 11:9 44.1kHz Stereo 128kbit/s 🕐
+* `.avi` 176x144 12fps 11:9 44.1kHz Mono 128kbit/s 🕐
+* `jpg` 640x480 24bit 96dpi 🕐
+
+After the compatibility check, we will test the maximum audio & video_length.
+
+> [!NOTE]
+> * ❌ Does not work at all
+> * ✔ Works just fine
+> * 🕐 Pending
+> * ⚠ Has some Problems
+
+### 🚀 Examples
+
+|Scenario|Command|Result|
+|---|---|---|
+|Folder Mode(Audio)|`nokiator.bat -f mp3 "C:\My Music"`|Searches for all .mp3 files and converts them to .mp3 (optimized audio).|
+|Folder Mode (Video)|`nokiator.bat -f mp4 ".\raw_videos"`|Searches for all .avi files and converts them to .mp4 (optimized video).|
+|Single File Mode (Image)|`nokiator.bat -s png "C:\Pics\Vacation.bmp"`|Converts Vacation.bmp to .png (optimized image size).|
+
+
+Copyright 2025 - Justus Decker | Licensed under the GPL V3 License.
