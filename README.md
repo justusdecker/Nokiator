@@ -82,3 +82,21 @@ After the compatibility check, we will test the maximum audio & video_length.
 
 
 Copyright 2025 - Justus Decker | Licensed under the GPL V3 License.
+
+# Specs of the Nokia RM 1190 / Nokia 150
+|Spec|Value|
+|---|---|
+|First released|13 December 2016|
+|Manufacturer|Foxconn|
+|Developer|HMD Global|
+|OS|Nokia Series 30+|
+|Weight|81g (2.86 oz)|
+|Removable Storage|Up to 32GB MicroSDHC|
+|Battery|1020 mAh Li-Ion(600h Stand-By, 22 Hours Call-Time)|
+|Display|2.4" LCD 320x240 (167 ppi)|
+|Sound|3.5mm AV Jack, speaker|
+|Connectivity| Bluetooth 3.0, USB 2.0 micro-B, FM-Radio|
+|Other|Flashlight LED|
+|Camera| 0.3MP|
+|Price(around 2016)|30-40€|
+|Price(2025)|50-150€|
