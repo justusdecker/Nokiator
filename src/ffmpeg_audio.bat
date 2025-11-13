@@ -10,4 +10,3 @@ if NOT "%3"=="" (
 )
 
 ffmpeg -i %1 %ENCODER_FLAGS% -y %2
-pause 2>NUL
