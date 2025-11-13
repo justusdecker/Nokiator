@@ -1,7 +1,7 @@
 set "CHANNELS=2" 
 set "BITRATE=128k"
 set "SAMPLERATE=44100" 
-set "ENCODER_FLAGS=-codec:a libmp3lame -b:a %BITRATE% -ar %SAMPLERATE% -ac %CHANNELS%" 
+set "ENCODER_FLAGS=-hide_banner -loglevel error -codec:a libmp3lame -b:a %BITRATE% -ar %SAMPLERATE% -ac %CHANNELS%" 
 echo %ENCODER_FLAGS%
 
 echo Started converting %1 to %2
