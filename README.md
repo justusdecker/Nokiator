@@ -57,8 +57,9 @@ nokiator.bat [MODE] [TYPE] "PATH"
 ### Output Formats(WIP)
 
 * `.mp3` 44.1kHz Stereo 96kbit/s 🕐
-* `.mp3` 44.1kHz Stereo 128kbit/s 🕐
-* `.avi` 640x480 24fps 4:3 44.1kHz Stereo 128kbit/s 🕐
+* `.mp3` 44.1kHz Stereo 128kbit/s ✔
+* `.avi` 176x144 24fps 4:3 44.1kHz Stereo 128kbit/s ✔
+* `.avi` 640x480 60fps 4:3 44.1kHz Stereo ~200kbit/s ❌
 * `.avi` 640x480 24fps 4:3 44.1kHz Mono 128kbit/s 🕐
 * `.avi` 176x144 12fps 11:9 44.1kHz Stereo 128kbit/s 🕐
 * `.avi` 176x144 12fps 11:9 44.1kHz Mono 128kbit/s 🕐
