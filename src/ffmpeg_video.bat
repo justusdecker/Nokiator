@@ -44,7 +44,7 @@ set "BITRATE=128k"
 set "SAMPLERATE=44100" 
 set "FPS=24"
 set "RESOLUTION=176:144"
-set "ENCODER_FLAGS=-codec:a libmp3lame -b:a %BITRATE% -ar %SAMPLERATE% -ac %CHANNELS% -filter:v fps=%FPS% -vf scale=%RESOLUTION%,setdar=4:3" 
+set "ENCODER_FLAGS=-hide_banner -loglevel error -codec:a libmp3lame -b:a %BITRATE% -ar %SAMPLERATE% -ac %CHANNELS% -filter:v fps=%FPS% -vf scale=%RESOLUTION%,setdar=4:3" 
 
 set "DRIVE=%~d2"
 set "FOLDER=%~p2"
