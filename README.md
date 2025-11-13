@@ -3,6 +3,16 @@
 
 An optimized Batch script wrapper around FFmpeg designed to convert media files into formats strictly compatible with the `Nokia RM 1190` device.
 
+#### 🎧 Audio Playback
+<img src="./data/audio_is_playing.png" width="25%">
+
+Also long audio playback is possible
+
+<img src="./data/audio_is_playing_long.png" width="25%">
+
+#### 🎧 Video Playback
+<img src="./data/video(screenshot).png" width="25%">
+
 ## ✨ Features & Specifications
 This utility ensures maximum compatibility by converting media to the `Nokia RM 1190's` native formats:
 * **Batch & Single File Modes:** Use -f for folder conversion or -s for a single file.
@@ -54,24 +64,17 @@ nokiator.bat [MODE] [TYPE] "PATH"
 |-f|Folder Mode: Converts ALL supported input files in the given `PATH`.|
 |-s|Single File Mode: Converts the specific single file `PATH`.|
 
-### Output Formats(WIP)
+### Supported Formats(WIP)
 
-* `.mp3` 44.1kHz Stereo 96kbit/s 🕐
 * `.mp3` 44.1kHz Stereo 128kbit/s ✔
 * `.avi` 176x144 24fps 4:3 44.1kHz Stereo 128kbit/s ✔
-* `.avi` 640x480 60fps 4:3 44.1kHz Stereo ~200kbit/s ❌
-* `.avi` 640x480 24fps 4:3 44.1kHz Mono 128kbit/s 🕐
-* `.avi` 176x144 12fps 11:9 44.1kHz Stereo 128kbit/s 🕐
-* `.avi` 176x144 12fps 11:9 44.1kHz Mono 128kbit/s 🕐
 * `jpg` 640x480 24bit 96dpi 🕐
 
 After the compatibility check, we will test the maximum audio & video_length.
 
 > [!NOTE]
-> * ❌ Does not work at all
 > * ✔ Works just fine
 > * 🕐 Pending
-> * ⚠ Has some Problems
 
 ### 🚀 Examples
 
