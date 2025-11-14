@@ -40,6 +40,9 @@ Also long audio playback is possible
 This project is a wrapper and requires the FFmpeg binary to function. 
 * Ensure that FFmpeg is accessible by the helper scripts within the ./src directory.
 
+> [!ATTENTION]
+> Paths can't contain spaces, otherwise the tool crashes
+
 ### Project Structure
 
 The project must maintain the following file structure:
